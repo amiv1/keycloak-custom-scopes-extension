@@ -38,4 +38,8 @@ public abstract class KeycloakIntegrationTest {
     protected String getUserInfoUrl(String realm) {
         return getRealmUrl(realm) + "/protocol/openid-connect/userinfo";
     }
+
+    protected String getIntrospectUrl(String realm) {
+        return getRealmUrl(realm) + "/protocol/openid-connect/token/introspect";
+    }
 }

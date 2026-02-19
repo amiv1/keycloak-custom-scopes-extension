@@ -85,4 +85,35 @@ public class ScopeMappingTest extends KeycloakIntegrationTest {
                 .body("sub", notNullValue())
                 .body("preferred_username", equalTo("testuser"));
     }
+
+    @Test
+    public void testTokenIntrospection() {
+        // Step 1: Get access token
+        ValidatableResponse tokenResponse = given()
+                .log().all()
+                .param("client_id", "testclient")
+                .param("client_secret", "testclient")
+                .param("grant_type", "client_credentials")
+                .param("scope", "s2s")
+            .when()
+                .post(getTokenUrl(REALM))
+            .then()
+                .log().all()
+                .statusCode(HttpStatus.SC_OK)
+                .body("access_token", notNullValue());
+
+        String accessToken = tokenResponse.extract().path("access_token");
+
+        // Step 2: Introspect the token using client credentials as Basic auth
+        given()
+                .log().all()
+                .auth().preemptive().basic("testclient", "testclient")
+                .param("token", accessToken)
+            .when()
+                .post(getIntrospectUrl(REALM))
+            .then()
+                .log().all()
+                .statusCode(HttpStatus.SC_OK)
+                .body("active", equalTo(true));
+    }
 }
