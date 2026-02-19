@@ -26,12 +26,12 @@ public class KeycloakDevContainer extends ExtendableKeycloakContainer<KeycloakDe
     @Override
     protected void configure() {
         this.withExposedPorts(8080, 9000, 8443, 8787);
+        this.withDebugFixedPort(8787, false);
         this.withAdminUsername("admin");
         this.withAdminPassword("admin");
         this.withRealmImportFile("realm-export.json");
         this.withEnv("KC_HEALTH_ENABLED", "true");
         this.withEnv("KC_METRICS_ENABLED", "true");
-        this.withDebugFixedPort(8787, true);
 
         super.configure();
         String[] commandParts = getCommandParts();

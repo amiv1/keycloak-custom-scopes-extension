@@ -20,7 +20,7 @@ public class ScopeMappingTest extends KeycloakIntegrationTest {
     private static final String REALM = "test";
 
     @Test
-    public void testServiceScopes() throws Exception {
+    public void testServiceScopes() {
         ValidatableResponse response = given()
                 .log().all()
                 .param("client_id", "testclient")
@@ -56,9 +56,9 @@ public class ScopeMappingTest extends KeycloakIntegrationTest {
                 .param("password", "password123")
                 .param("grant_type", "password")
                 .param("scope", "openid")
-                .when()
+            .when()
                 .post(getTokenUrl(REALM))
-                .then()
+            .then()
                 .log().all()
                 .statusCode(HttpStatus.SC_OK)
                 .body("access_token", notNullValue())
@@ -66,13 +66,20 @@ public class ScopeMappingTest extends KeycloakIntegrationTest {
 
         String accessToken = tokenResponse.extract().path("access_token");
 
+        DecodedJWT jwt = JWT.decode(accessToken);
+        Claim scopeClaim = jwt.getClaim("scope");
+        assertFalse(scopeClaim.isNull());
+
+        List<String> scopes = scopeClaim.asList(String.class);
+        assertTrue(scopes.contains("openid"));
+
         // Step 2: Use access token to fetch user info
         given()
                 .log().all()
                 .auth().oauth2(accessToken)
-                .when()
+            .when()
                 .get(getUserInfoUrl(REALM))
-                .then()
+            .then()
                 .log().all()
                 .statusCode(HttpStatus.SC_OK)
                 .body("sub", notNullValue())
