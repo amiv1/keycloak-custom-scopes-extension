@@ -5,11 +5,11 @@ plugins {
 group = 'com.example'
 version = '1.0'
 
-def keycloakVersion = '22.0.0'
+def keycloakVersion = '26.5.3'
 def restAssuredVersion = '5.3.0'
 // Check testcontainers Keycloak version compatibility here:
 // https://github.com/dasniko/testcontainers-keycloak#testcontainers--keycloak-version-compatiblity
-def testContainersKeycloakVersion = '2.2.2'
+def testContainersKeycloakVersion = '4.1.1'
 
 repositories {
     maven {
@@ -57,7 +57,15 @@ sourceSets {
         runtimeClasspath += main.output + test.output
     }
 }
+
 configurations {
     testIntegrationImplementation.extendsFrom testImplementation
     testIntegrationRuntimeOnly.extendsFrom testRuntime
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+

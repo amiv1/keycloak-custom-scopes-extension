@@ -12,7 +12,7 @@ public class KeycloakDevRunner {
         keyCloak.withFixedExposedPort(8787, 8787);
         keyCloak.start();
 
-        System.out.println("Keycloak Running, you can now attach your remote debugger!");
+        System.out.println("Keycloak Running, you can now attach your remote debugger to localhost:8787");
         System.in.read();
     }
 }

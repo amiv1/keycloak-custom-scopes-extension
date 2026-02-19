@@ -28,10 +28,14 @@ public abstract class KeycloakIntegrationTest {
     }
 
     protected String getRealmUrl(String realm) {
-        return getAuthServerUrl() + "realms/" + realm + "/";
+        return getAuthServerUrl() + "/realms/" + realm ;
     }
 
     protected String getTokenUrl(String realm) {
-        return getRealmUrl(realm) + "protocol/openid-connect/token";
+        return getRealmUrl(realm) + "/protocol/openid-connect/token";
+    }
+
+    protected String getUserInfoUrl(String realm) {
+        return getRealmUrl(realm) + "/protocol/openid-connect/userinfo";
     }
 }
