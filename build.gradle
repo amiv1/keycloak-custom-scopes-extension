@@ -8,7 +8,7 @@ version = '1.0'
 def keycloakVersion = '26.5.3'
 def restAssuredVersion = '5.3.0'
 // Check testcontainers Keycloak version compatibility here:
-// https://github.com/dasniko/testcontainers-keycloak#testcontainers--keycloak-version-compatiblity
+// https://github.com/dasniko/testcontainers-keycloak/blob/main/versions.md
 def testContainersKeycloakVersion = '4.1.1'
 
 repositories {
