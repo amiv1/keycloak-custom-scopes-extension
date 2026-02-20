@@ -1,0 +1,9 @@
+services:
+  keycloak:
+    build: .
+    ports:
+      - "8080:8080"
+      - "8787:8787"
+    environment:
+      DEBUG: "true"
+      DEBUG_PORT: "*:8787"

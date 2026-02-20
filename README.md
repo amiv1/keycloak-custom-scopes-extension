@@ -13,11 +13,16 @@ And transforms it into Array type:
 "scope": ["foo", "bar"]
 ```
 
-## Run playground
+## Run playground using Docker Compose
 
-If you have Docker daemon running on your machine, you can just run [KeycloakDevRunner](src/test/java/KeycloakDevRunner.java).
+To run the playground, just execute the following command:
 
-It will launch pre-configured Keycloak instance in a temporary Docker container with the following client credentials:
+```shell
+./gradlew jar
+docker compose up --build
+```
+
+It will launch pre-configured Keycloak instance at http://localhost:8080 with the following client:
 
 * Client ID: testclient
 * Client Secret: testclient
@@ -25,8 +30,8 @@ It will launch pre-configured Keycloak instance in a temporary Docker container 
 You can use these credentials to authenticate using client credentials grant type and check scopes JWT claim
 to verify that the mapper is working as expected.
 
-```bash
-curl --request POST --data 'grant_type=client_credentials&client_id=testclient&client_secret=testclient' http://localhost:8180/realms/test/protocol/openid-connect/token
+```shell
+curl --request POST --data 'grant_type=client_credentials&client_id=testclient&client_secret=testclient' http://localhost:8080/realms/test/protocol/openid-connect/token
 ```
 
 <img width="591" alt="Screenshot 2023-07-13 at 12 21 10" src="https://github.com/gim-/keycloak-custom-scopes-extension/assets/1240012/0ecec47c-a7a3-4ea2-96fd-3728fc12788b">
@@ -35,12 +40,12 @@ curl --request POST --data 'grant_type=client_credentials&client_id=testclient&c
 
 To build the extension, just run the following command:
 
-```bash
+```shell
 ./gradlew jar
 ```
 
 Then copy resulting JAR file to your Keycloak's providers directory.
-```bash
+```shell
 cp build/libs/keycloak-custom-scopes-extension-1.0.jar KEYCLOAK_ROOT/providers
 ```
 
