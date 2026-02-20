@@ -1,4 +1,4 @@
-import com.example.KeycloakDevContainer;
+import com.github.amiv1.keycloak.KeycloakDevContainer;
 
 /**
  * Used to launch Keycloak Docker container for extension testing and debugging.

@@ -1,4 +1,4 @@
-package com.example.keycloak;
+package com.github.amiv1.keycloak;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.Claim;

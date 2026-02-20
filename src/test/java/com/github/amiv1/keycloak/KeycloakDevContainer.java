@@ -1,4 +1,4 @@
-package com.example;
+package com.github.amiv1.keycloak;
 
 import dasniko.testcontainers.keycloak.ExtendableKeycloakContainer;
 import org.testcontainers.utility.MountableFile;

@@ -1,6 +1,5 @@
-package com.example.keycloak;
+package com.github.amiv1.keycloak;
 
-import com.example.KeycloakDevContainer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 

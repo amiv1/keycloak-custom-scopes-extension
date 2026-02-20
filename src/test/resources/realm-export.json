@@ -546,7 +546,7 @@
           "id": "18f51192-7634-4de1-8bc8-a6076f386973",
           "name": "Custom Scope Claim Mapper",
           "protocol": "openid-connect",
-          "protocolMapper": "oidc-custom-protocol-mapper",
+          "protocolMapper": "oidc-array-scopes-protocol-mapper",
           "consentRequired": false,
           "config": {}
         }

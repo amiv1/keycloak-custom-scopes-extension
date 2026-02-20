@@ -1,1 +1,1 @@
-com.example.mapper.CustomOIDCProtocolMapper
+com.github.amiv1.keycloak.mapper.ArrayScopesProtocolMapper

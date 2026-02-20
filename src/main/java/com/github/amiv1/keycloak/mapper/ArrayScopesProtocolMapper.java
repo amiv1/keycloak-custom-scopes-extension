@@ -1,6 +1,5 @@
-package com.example.mapper;
+package com.github.amiv1.keycloak.mapper;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -24,10 +23,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomOIDCProtocolMapper extends AbstractOIDCProtocolMapper
+public class ArrayScopesProtocolMapper extends AbstractOIDCProtocolMapper
         implements OIDCAccessTokenMapper {
 
-    public static final String PROVIDER_ID = "oidc-custom-protocol-mapper";
+    public static final String PROVIDER_ID = "oidc-array-scopes-protocol-mapper";
     private static volatile boolean jsonModuleInjected;
 
     @Override
@@ -51,12 +50,13 @@ public class CustomOIDCProtocolMapper extends AbstractOIDCProtocolMapper
 
     @Override
     public String getDisplayType() {
-        return "Custom Scope Claim Mapper";
+        return "Array Scopes Mapper";
     }
 
     @Override
     public String getHelpText() {
-        return "Modifies `scope` claim in resulting access token";
+        return "Modifies `scope` claim in resulting access token to be an array of strings "
+                + "instead of a space-separated string.";
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CustomOIDCProtocolMapper extends AbstractOIDCProtocolMapper
         SimpleModule module = new SimpleModule("access-token-scope-deserializer");
         module.addDeserializer(AccessToken.class, new JsonDeserializer<>() {
             @Override
-            public AccessToken deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+            public AccessToken deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
                 // Read the whole token as a tree so we can inspect/modify the "scope" node
                 ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
                 ObjectNode root = mapper.readTree(jsonParser);
