@@ -30,7 +30,9 @@ public class ArrayScopesProtocolMapper extends AbstractOIDCProtocolMapper
     private static volatile boolean jsonModuleInjected;
 
     @Override
-    public AccessToken transformAccessToken(AccessToken token, ProtocolMapperModel mappingModel, KeycloakSession session, UserSessionModel userSession, ClientSessionContext clientSessionCtx) {
+    public AccessToken transformAccessToken(AccessToken token, ProtocolMapperModel mappingModel,
+                                            KeycloakSession session, UserSessionModel userSession,
+                                            ClientSessionContext clientSessionCtx) {
         if (!jsonModuleInjected) {
             synchronized (this) {
                 if (!jsonModuleInjected) {
